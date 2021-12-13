@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Zarządzanie grupami</title>
+
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+
+<h1> Witamy w parking :)))</h1>
+
+
+
+<p>Wyświetl miejsca parkingowe</p>
+<p>Znajdź miejsce parkingowe</p>
+<p>Znajdź miejsce parkingowe</p>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Ilosc kolumn</th>
+    <th scope="col">Ilosc rzędów</th>
+    <th scope="col">Nazwa</th>
+  </tr>
+  </thead>
+
+
+  <tbody>
+  <tr th:each="parking : ${parkings}">
+    <td th:text="${parking.id}"></td>
+    <td th:text="${parking.numberOfColumns}"></td>
+    <td th:text="${parking.numberOfRows}"></td>
+    <td th:text="${parking.name}"></td>
+  </tr>
+
+  </tbody>
+</table>
+
+
+
+
+</body>
+</html>

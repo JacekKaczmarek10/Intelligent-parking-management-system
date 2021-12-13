@@ -11,4 +11,9 @@ public class MainController {
     public String showPage(){
         return "index";
     }
+
+    @GetMapping("/parking")
+    public String showAwsPage(){
+        return "parking";
+    }
 }
