@@ -5,38 +5,64 @@ public class ParkingRequest {
     public ParkingRequest() {
     }
 
-    public int numberOfRows;
-    public int numberOfColumns;
+
+    public int numberOfPlaces;
+    public String city;
     public String name;
+    public String street;
+    public String postalCode;
 
-    public int getNumberOfRows() {
-        return numberOfRows;
+    public int getNumberOfPlaces() {
+        return numberOfPlaces;
     }
 
-    public int getNumberOfColumns() {
-        return numberOfColumns;
+    public void setNumberOfPlaces(int numberOfPlaces) {
+        this.numberOfPlaces = numberOfPlaces;
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
 
     public String getName() {
         return name;
     }
 
-    public void setNumberOfRows(int numberOfRows) {
-        this.numberOfRows = numberOfRows;
-    }
-
-    public void setNumberOfColumns(int numberOfColumns) {
-        this.numberOfColumns = numberOfColumns;
-    }
 
     public void setName(String name) {
         this.name = name;
     }
 
 
-    public ParkingRequest(int numberOfRows, int numberOfColumns, String name) {
-        this.numberOfRows = numberOfRows;
-        this.numberOfColumns = numberOfColumns;
+    public ParkingRequest(int numberOfPlaces, String city, String name, String street, String postalCode) {
+        this.numberOfPlaces = numberOfPlaces;
+        this.city = city;
         this.name = name;
+        this.street = street;
+        this.postalCode = postalCode;
     }
 }
+
+
+

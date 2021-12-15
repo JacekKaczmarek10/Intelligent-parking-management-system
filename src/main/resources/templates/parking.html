@@ -24,9 +24,9 @@
   <thead>
   <tr>
     <th scope="col">ID</th>
-    <th scope="col">Ilosc kolumn</th>
-    <th scope="col">Ilosc rzędów</th>
     <th scope="col">Nazwa</th>
+    <th scope="col">Miasto</th>
+    <th scope="col">Ilość miejsc</th>
   </tr>
   </thead>
 
@@ -34,9 +34,9 @@
   <tbody>
   <tr th:each="parking : ${parkings}">
     <td th:text="${parking.id}"></td>
-    <td th:text="${parking.numberOfColumns}"></td>
-    <td th:text="${parking.numberOfRows}"></td>
     <td th:text="${parking.name}"></td>
+    <td th:text="${parking.city}"></td>
+    <td th:text="${parking.numberOfPlaces}"></td>
   </tr>
 
   </tbody>

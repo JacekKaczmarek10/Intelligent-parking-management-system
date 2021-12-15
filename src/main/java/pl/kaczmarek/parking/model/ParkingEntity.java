@@ -22,38 +22,46 @@ public class ParkingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "number_of_rows")
-    private int numberOfRows;
 
-    @Column(name = "number_of_columns")
-    private int numberOfColumns;
-
-    @Size(max = 100)
+    @Column(name = "number_of_places")
+    public Integer numberOfPlaces;
+    @Column(name = "city")
+    public String city;
     @Column(name = "name")
-    private String name;
+    public String name;
+    @Column(name = "street")
+    public String street;
+    @Column(name = "postalCode")
+    public String postalCode;
 
     public ParkingEntity() {
     }
 
-    public ParkingEntity(int numberOfRows, int numberOfColumns, String name) {
-        this.numberOfRows = numberOfRows;
-        this.numberOfColumns = numberOfColumns;
+    public ParkingEntity(int numberOfPlaces, String city, String name, String street, String postalCode) {
+        this.numberOfPlaces = numberOfPlaces;
+        this.city = city;
         this.name = name;
+        this.street = street;
+        this.postalCode = postalCode;
     }
 
-    public long getId() {
-        return id;
+    public int getNumberOfPlaces() {
+        return numberOfPlaces;
     }
 
-    public int getNumberOfRows() {
-        return numberOfRows;
-    }
-
-    public int getNumberOfColumns() {
-        return numberOfColumns;
+    public String getCity() {
+        return city;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
     }
 }

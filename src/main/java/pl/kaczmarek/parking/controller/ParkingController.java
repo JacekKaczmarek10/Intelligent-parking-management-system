@@ -65,16 +65,14 @@ public class ParkingController {
 
 
     @RequestMapping(value = "/add-parking", method = RequestMethod.POST)
-    public ResponseEntity<Object> addParking(@Param("numberOfRows")int numberOfRows,
-                                             @Param("numberOfColumns")int numberOfColumns,
-                                             @Param("name")String name){
-        parkingService.addParking(new ParkingRequest(numberOfRows,numberOfColumns,name));
+    public ResponseEntity<Object> addParking(@Param("numberOfPlaces")int numberOfPlaces,
+                                             @Param("city")String city,
+                                             @Param("name")String name,
+                                             @Param("street")String street,
+                                             @Param("postalCode")String postalCode){
+        parkingService.addParking(new ParkingRequest(numberOfPlaces, city,name,street,postalCode));
         return ResponseEntity.status(200).build();
     }
 
-    @GetMapping("/display-parking")
-    public String displayParking(Model model){
-        model.addAttribute("parkings",parkingService.getAll());
-        return "parking";
-    }
+
 }

@@ -15,7 +15,7 @@ import pl.kaczmarek.parking_place.model.ParkingPlaceEntity;
 @Repository
 public interface ParkingPlaceRepository extends JpaRepository<ParkingPlaceEntity,Long> {
 
-    @Query(value = "select * from userdb.parking_place where parking=:id", nativeQuery = true)
+    @Query(value = "select * from cloud337.parking_place where parking_place.parking=:id", nativeQuery = true)
     List<ParkingPlaceEntity> getAllByParkingId(@Param("id") Long id);
 
 

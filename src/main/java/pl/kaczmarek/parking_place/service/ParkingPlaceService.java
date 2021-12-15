@@ -14,10 +14,14 @@ public class ParkingPlaceService {
     public List<ParkingPlaceResponse> getResponseList(List<ParkingPlaceEntity> entityList){
         List<ParkingPlaceResponse> responseList = new ArrayList<>();
         for(ParkingPlaceEntity parkingPlaceEntity : entityList){
-            ParkingPlaceResponse parkingPlaceResponse = new ParkingPlaceResponse(parkingPlaceEntity.getX_1(),
-                parkingPlaceEntity.getY_1(),parkingPlaceEntity.getX_2(),parkingPlaceEntity.getY_2());
+            ParkingPlaceResponse parkingPlaceResponse = new ParkingPlaceResponse(parkingPlaceEntity.getId(),
+                parkingPlaceEntity.getX_1(),
+                parkingPlaceEntity.getY_1(),parkingPlaceEntity.getX_2(),parkingPlaceEntity.getY_2(),
+                parkingPlaceEntity.getX_3(),parkingPlaceEntity.getY_3(),parkingPlaceEntity.getX_4(),
+                parkingPlaceEntity.getY_4());
             responseList.add(parkingPlaceResponse);
         }
+
         return responseList;
     }
 }

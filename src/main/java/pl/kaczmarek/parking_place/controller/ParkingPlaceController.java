@@ -16,6 +16,7 @@ import java.util.List;
 
 import pl.kaczmarek.parking.model.ParkingEntity;
 import pl.kaczmarek.parking.repository.ParkingRepository;
+import pl.kaczmarek.parking_place.dto.ParkingPlacesDetailedResponse;
 import pl.kaczmarek.parking_place.model.ParkingPlaceEntity;
 import pl.kaczmarek.parking_place.repository.ParkingPlaceRepository;
 import pl.kaczmarek.parking_place.service.ParkingPlaceService;
@@ -37,7 +38,7 @@ public class ParkingPlaceController {
     public ResponseEntity<Object> getParkingPlacesData(@Param("name")String name){
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
         List<ParkingPlaceEntity> list = parkingPlaceRepository.getAllByParkingId(parkingEntity.getId());
-        return ResponseEntity.status(200).body(parkingPlaceService.getResponseList(list));
+        return ResponseEntity.status(200).body(new ParkingPlacesDetailedResponse(name,parkingPlaceService.getResponseList(list)));
     }
 
     @RequestMapping(value = "/add-parking-place", method = RequestMethod.POST)
@@ -49,6 +50,15 @@ public class ParkingPlaceController {
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
         return ResponseEntity.status(200).
             body(parkingPlaceRepository.save(new ParkingPlaceEntity(parkingEntity,x1,y1,x2,y2)));
+    }
+
+    @RequestMapping(value = "/change-parking-place", method = RequestMethod.POST)
+    public ResponseEntity<Object> changeParkingStatus(@Param("status")Boolean status,
+                                                  @Param("id")Long id){
+        ParkingPlaceEntity parkingPlaceEntity = parkingPlaceRepository.getById(id);
+        parkingPlaceEntity.setIsFree(status);
+        parkingPlaceRepository.save(parkingPlaceEntity);
+        return ResponseEntity.status(200).build();
     }
 
 }

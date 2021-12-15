@@ -42,6 +42,18 @@ public class ParkingPlaceEntity {
     @Column(name = "y_2")
     private Integer y_2;
 
+    @Column(name = "x_3")
+    private Integer x_3;
+
+    @Column(name = "y_3")
+    private Integer y_3;
+
+    @Column(name = "x_4")
+    private Integer x_4;
+
+    @Column(name = "y_4")
+    private Integer y_4;
+
     public ParkingPlaceEntity() {
     }
 
