@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Zarządzanie parkingiem</title>
+    <title>Szczegóły parkingu</title>
 
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -10,14 +10,7 @@
           crossorigin="anonymous">
 </head>
 <body>
-
-<h1> Szczegóły miejsca parkingowego</h1>
-
-
-
-
-
-
+<h1> Szczegóły parkingu</h1>
 <table class="table">
     <thead>
     <tr>
@@ -27,8 +20,6 @@
         <th scope="col">Nazwa</th>
     </tr>
     </thead>
-
-
     <tbody>
     <tr th:each="parking : ${parkingPlaces}">
         <td th:text="${parking.id}"></td>

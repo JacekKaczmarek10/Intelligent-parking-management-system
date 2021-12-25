@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista użytkowników</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+
+
+<div class="container my-2">
+    <h1> Lista grup</h1>
+    <br>
+    <br>
+    <table border="1" class = "table table-striped table-responsive-md">
+        <thead class="thead-dark">
+        <tr>
+            <th>
+                    Imię
+            </th>
+            <th>
+                    Nazwisko
+            </th>
+            <th>
+                    Email
+            </th>
+            <th>
+                    Telefon
+            </th>
+            <th>
+                Rola
+            </th>
+            <th>
+                Edytuj użytkownika
+            </th>
+            <th>
+                Usuń użytkownika
+            </th>
+        </tr>
+        </thead>
+
+<tbody>
+<tr th:each="user : ${users}">
+    <td th:text="${user.firstName}"></td>
+    <td th:text="${user.lastName}"></td>
+    <td th:text="${user.email}"></td>
+    <td th:text="${user.phone}"></td>
+    <td th:text="${user.role}"></td>
+    <td>
+        <form method="POST" th:action="@{/delete/{id}(id=${user.email})}">
+            <button type="submit" name="submit" value="value" class="btn btn-danger">Usuń</button>
+        </form>
+    </td>
+    <td>
+        <a th:href = "@{/showEditGroupForm/{id}(id=${user.email})}" class="btn btn-warning"> Edytuj</a>
+    </td>
+</tr>
+</tbody>
+    </table>
+
+    <a th:href = "@{/showParkingExchangeForm}">Powrót do głównej listy</a>
+</div>
+
+<!--<tr th:each="employee : ${listEmployees}">-->
+<!--    <td th:text="${employee.firstName}"></td>-->
+
+</body>
+</html>

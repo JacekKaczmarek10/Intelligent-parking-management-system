@@ -21,10 +21,8 @@ public class ParkingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-
     @Column(name = "number_of_places")
-    public Integer numberOfPlaces;
+    public int numberOfPlaces;
     @Column(name = "city")
     public String city;
     @Column(name = "name")
@@ -35,6 +33,10 @@ public class ParkingEntity {
     public String postalCode;
 
     public ParkingEntity() {
+    }
+
+    public ParkingEntity(String name) {
+        this.name = name;
     }
 
     public ParkingEntity(int numberOfPlaces, String city, String name, String street, String postalCode) {

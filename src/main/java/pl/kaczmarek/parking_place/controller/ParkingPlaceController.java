@@ -24,7 +24,6 @@ import pl.kaczmarek.parking_place.service.ParkingPlaceService;
 @Controller
 public class ParkingPlaceController {
 
-
     @Autowired
     ParkingRepository parkingRepository;
 
@@ -38,7 +37,8 @@ public class ParkingPlaceController {
     public ResponseEntity<Object> getParkingPlacesData(@Param("name")String name){
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
         List<ParkingPlaceEntity> list = parkingPlaceRepository.getAllByParkingId(parkingEntity.getId());
-        return ResponseEntity.status(200).body(new ParkingPlacesDetailedResponse(name,parkingPlaceService.getResponseList(list)));
+        return ResponseEntity.status(200).body(new ParkingPlacesDetailedResponse(name,list.size(),
+            parkingPlaceService.getResponseList(list)));
     }
 
     @RequestMapping(value = "/add-parking-place", method = RequestMethod.POST)
