@@ -45,11 +45,15 @@ public class ParkingPlaceController {
     public ResponseEntity<Object> addParkingPlace(@Param("name")String name,
                                                   @Param("x1")int x1,
                                                   @Param("x2")int x2,
+                                                  @Param("x3")int x3,
+                                                  @Param("x4")int x4,
                                                   @Param("y1")int y1,
-                                                  @Param("y2")int y2){
+                                                  @Param("y2")int y2,
+                                                  @Param("y3")int y3,
+                                                  @Param("y4")int y4){
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
         return ResponseEntity.status(200).
-            body(parkingPlaceRepository.save(new ParkingPlaceEntity(parkingEntity,x1,y1,x2,y2)));
+            body(parkingPlaceRepository.save(new ParkingPlaceEntity(parkingEntity,x1,y1,x2,y2,x3,y3,x4,y4)));
     }
 
     @RequestMapping(value = "/change-parking-place", method = RequestMethod.POST)

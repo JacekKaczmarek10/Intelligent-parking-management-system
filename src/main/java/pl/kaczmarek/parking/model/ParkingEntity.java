@@ -12,10 +12,14 @@ import javax.validation.constraints.Size;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Data
 @Table(name = "Parking")
+@Getter
+@Setter
 public class ParkingEntity {
 
     @Id
@@ -31,6 +35,10 @@ public class ParkingEntity {
     public String street;
     @Column(name = "postalCode")
     public String postalCode;
+    @Column(name = "has_added_points")
+    public boolean hasAddedPoints;
+    @Column(name = "imagePath")
+    public String imagePath;
 
     public ParkingEntity() {
     }
@@ -45,25 +53,8 @@ public class ParkingEntity {
         this.name = name;
         this.street = street;
         this.postalCode = postalCode;
+        this.hasAddedPoints = false;
     }
 
-    public int getNumberOfPlaces() {
-        return numberOfPlaces;
-    }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
 }

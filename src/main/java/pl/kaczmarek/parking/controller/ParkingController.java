@@ -22,6 +22,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import pl.kaczmarek.parking.dto.ParkingRequest;
+import pl.kaczmarek.parking.model.ParkingEntity;
+import pl.kaczmarek.parking.repository.ParkingRepository;
 import pl.kaczmarek.parking.service.ParkingService;
 
 @Controller
@@ -30,8 +32,17 @@ public class ParkingController {
     @Autowired
     ParkingService parkingService;
 
+    @Autowired
+    ParkingRepository parkingRepository;
+
     @Value("${filesPath}")
     private String filesPath;
+
+    @GetMapping("/showParkingInstructionForm")
+    public String showParkingInstructionForm(){
+        return "parking_instruction";
+    }
+
 
     public String getFileExtension(MultipartFile file){
         String extension = "";
@@ -46,20 +57,21 @@ public class ParkingController {
 
     @RequestMapping(value = "/add-parking-image", method = RequestMethod.POST,
         headers = "Content-Type=multipart/form-data")
-    public ResponseEntity<Object> addParkingImage(@RequestParam("file") MultipartFile file){
-        System.out.println(file.getOriginalFilename());
-
+    public ResponseEntity<Object> addParkingImage(@RequestParam("file") MultipartFile file,
+                                                  @RequestParam("name")String name){
+        ParkingEntity parkingEntity = parkingRepository.getByName(name);
+        if(parkingEntity==null){
+            return ResponseEntity.status(400).build();
+        }
         String fileName = file.getOriginalFilename();
         Path path = Paths.get(filesPath + fileName);
-        String extention = getFileExtension(file);
-
         try {
             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            parkingEntity.setImagePath(fileName);
+            parkingRepository.save(parkingEntity);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-
         return ResponseEntity.status(200).build();
     }
 
