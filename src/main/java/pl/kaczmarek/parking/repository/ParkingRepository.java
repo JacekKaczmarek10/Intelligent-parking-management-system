@@ -17,9 +17,8 @@ public interface ParkingRepository  extends JpaRepository<ParkingEntity,Long> {
     ParkingEntity getByName(@Param("name") String name);
 
     @Query(value = "select * from parking.parking "
-        + "where parking.has_added_points=false and parking.image_path is not null", nativeQuery =
-        true)
-    List<ParkingEntity> getAllWithoutPoints();
+        + "where parking.has_added_points=false and parking.image_path is not null", nativeQuery = true)
+    List<ParkingEntity> getAllWithoutParkingPlaces();
 
 
 }

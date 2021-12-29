@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,12 +28,11 @@ public class ParkingService  {
     @Autowired
     ParkingPlaceService parkingPlaceService;
 
-    private final ParkingRepository parkingRepository;
+    @Autowired
+    ParkingRepository parkingRepository;
 
-    public ParkingService(ParkingRepository parkingRepository) {
-        this.parkingRepository = parkingRepository;
-    }
-
+    @Value("${filesPath}")
+    private String filesPath;
 
     public void addParking(ParkingRequest parking){
         ParkingEntity parkingEntity = new ParkingEntity(parking.getNumberOfPlaces(),parking.getCity(),
@@ -50,32 +48,51 @@ public class ParkingService  {
         return a+b;
     }
 
-    @Value("${filesPath}")
-    private String filesPath;
 
 
-    @Scheduled(cron = "*/10 * * * * ?")
-    public void scanImageForDots() throws IOException {
-        // Open a JPEG file, load into a BufferedImage.
-        System.out.println("RUNNING");
-        List<ParkingEntity> parkingEntityList = parkingRepository.getAllWithoutPoints();
+
+    @Scheduled(cron = "0 */5 * * * ?")
+    public void scanParkingImage() throws IOException {
+
+        System.out.println("SCANNING PARKING CONFIG IMAGE RUNNING");
+        List<ParkingEntity> parkingEntityList = parkingRepository.getAllWithoutParkingPlaces();
         for(ParkingEntity parking : parkingEntityList) {
+            // Open a JPEG file, load into a BufferedImage.
             BufferedImage img = ImageIO.read(new File(filesPath + parking.getImagePath()));
-            List<Point> pointList = new ArrayList<>();
-            for (int i = 0; i < img.getWidth(); i++) {
-                for (int j = 0; j < img.getHeight(); j++) {
-                    if (Math.abs(img.getRGB(i, j)) > 16000000 && Math.abs(img.getRGB(i, j)) < 17000000 &&
-                        hasAlreadyPoint(i, j, pointList) == false) {
-                        Point point = new Point(i, j);
-                        pointList.add(point);
-                    }
-                }
-            }
+            List <Point> pointList = getParkingPlacesCoordinatesFromImage(img);
             // create parking places
             parkingPlaceService.createParkingPlaces(parking,pointList);
         }
+        System.out.println("SCANNING PARKING CONFIG IMAGE");
     }
 
+    /**
+     * @param img
+     *
+     * @return
+     */
+    public  List<Point> getParkingPlacesCoordinatesFromImage(BufferedImage img){
+        List<Point> pointList = new ArrayList<>();
+        for (int i = 0; i < img.getWidth(); i++) {
+            for (int j = 0; j < img.getHeight(); j++) {
+                if (Math.abs(img.getRGB(i, j)) > 16000000 && Math.abs(img.getRGB(i, j)) < 17000000 &&
+                    hasAlreadyPoint(i, j, pointList) == false) {
+                    Point point = new Point(i, j);
+                    pointList.add(point);
+                }
+            }
+        }
+        return pointList;
+    }
+
+
+    /**
+     * @param x
+     * @param y
+     * @param pointList
+     *
+     * @return
+     */
     public boolean hasAlreadyPoint(int x,int y,List<Point> pointList){
         for(Point point: pointList){
             if(Math.abs(point.getX()-x)<10 && Math.abs(point.getY()-y)<10){

@@ -33,11 +33,11 @@ public class ParkingEntity {
     public String name;
     @Column(name = "street")
     public String street;
-    @Column(name = "postalCode")
+    @Column(name = "postal_code")
     public String postalCode;
     @Column(name = "has_added_points")
     public boolean hasAddedPoints;
-    @Column(name = "imagePath")
+    @Column(name = "image_path")
     public String imagePath;
 
     public ParkingEntity() {

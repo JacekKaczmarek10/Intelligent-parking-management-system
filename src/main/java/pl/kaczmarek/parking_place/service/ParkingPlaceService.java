@@ -41,12 +41,8 @@ public class ParkingPlaceService {
     }
 
     public void createParkingPlaces(ParkingEntity parking, List<Point> pointList){
-        int x =70;
-        int y= 140;
         pointList.sort(Comparator.comparing(Point::getX));
-        boolean hasNext = true;
         Iterator<Point> it = pointList.iterator();
-
         Point one = null;
         Point two = null;
         Point three = null;

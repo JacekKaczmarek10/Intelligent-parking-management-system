@@ -29,7 +29,7 @@ import pl.kaczmarek.parking.service.ParkingService;
 @Controller
 public class ParkingController {
 
-    @Autowiredgi
+    @Autowired
     ParkingService parkingService;
 
     @Autowired
