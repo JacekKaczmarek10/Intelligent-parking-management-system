@@ -29,7 +29,7 @@ import pl.kaczmarek.parking.service.ParkingService;
 @Controller
 public class ParkingController {
 
-    @Autowired
+    @Autowiredgi
     ParkingService parkingService;
 
     @Autowired
@@ -43,19 +43,8 @@ public class ParkingController {
         return "parking_instruction";
     }
 
-
-    public String getFileExtension(MultipartFile file){
-        String extension = "";
-
-        int i = file.getOriginalFilename().lastIndexOf('.');
-        if (i > 0) {
-            extension = file.getOriginalFilename().substring(i+1);
-        }
-        return ("." + extension);
-    }
-
-
-    @RequestMapping(value = "/add-parking-image", method = RequestMethod.POST,
+    @RequestMapping(value = "/add-parking-image",
+        method = RequestMethod.POST,
         headers = "Content-Type=multipart/form-data")
     public ResponseEntity<Object> addParkingImage(@RequestParam("file") MultipartFile file,
                                                   @RequestParam("name")String name){
@@ -75,14 +64,12 @@ public class ParkingController {
         return ResponseEntity.status(200).build();
     }
 
-
     @RequestMapping(value = "/add-parking", method = RequestMethod.POST)
-    public ResponseEntity<Object> addParking(@Param("numberOfPlaces")int numberOfPlaces,
-                                             @Param("city")String city,
+    public ResponseEntity<Object> addParking(@Param("city")String city,
                                              @Param("name")String name,
                                              @Param("street")String street,
                                              @Param("postalCode")String postalCode){
-        parkingService.addParking(new ParkingRequest(numberOfPlaces, city,name,street,postalCode));
+        parkingService.addParking(new ParkingRequest(0, city,name,street,postalCode));
         return ResponseEntity.status(200).build();
     }
 

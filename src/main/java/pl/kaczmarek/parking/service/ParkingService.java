@@ -24,7 +24,7 @@ import pl.kaczmarek.parking_place.service.ParkingPlaceService;
 
 @Service
 @Scope("prototype")
-public class ParkingService {
+public class ParkingService  {
 
     @Autowired
     ParkingPlaceService parkingPlaceService;
