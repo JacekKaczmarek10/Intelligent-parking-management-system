@@ -20,5 +20,4 @@ public interface ParkingRepository  extends JpaRepository<ParkingEntity,Long> {
         + "where parking.has_added_points=false and parking.image_path is not null", nativeQuery = true)
     List<ParkingEntity> getAllWithoutParkingPlaces();
 
-
 }

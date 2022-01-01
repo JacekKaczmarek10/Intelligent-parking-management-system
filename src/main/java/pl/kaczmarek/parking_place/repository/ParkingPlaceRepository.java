@@ -18,6 +18,4 @@ public interface ParkingPlaceRepository extends JpaRepository<ParkingPlaceEntity
     @Query(value = "select * from parking.parking_place where parking_place.parking=:id", nativeQuery = true)
     List<ParkingPlaceEntity> getAllByParkingId(@Param("id") Long id);
 
-
-
 }

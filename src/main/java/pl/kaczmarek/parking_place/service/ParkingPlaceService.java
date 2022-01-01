@@ -26,6 +26,9 @@ public class ParkingPlaceService {
     @Autowired
     ParkingRepository parkingRepository;
 
+    /**
+     * Returns a list of parking spaces.
+     */
     public List<ParkingPlaceResponse> getResponseList(List<ParkingPlaceEntity> entityList){
         List<ParkingPlaceResponse> responseList = new ArrayList<>();
         for(ParkingPlaceEntity parkingPlaceEntity : entityList){
@@ -36,13 +39,26 @@ public class ParkingPlaceService {
                 parkingPlaceEntity.getY_4());
             responseList.add(parkingPlaceResponse);
         }
-
         return responseList;
     }
 
-    public void createParkingPlaces(ParkingEntity parking, List<Point> pointList){
+    /**
+     * Function creates parking places for parking.
+     * Function returns number of parking places;
+     *
+     * @param parking - parking object
+     * @param pointList - list of coordinates
+     */
+    public int createParkingPlaces(ParkingEntity parking, List<Point> pointList){
         pointList.sort(Comparator.comparing(Point::getX));
-        Iterator<Point> it = pointList.iterator();
+        int numberOfPlaces = 0;
+        if(pointList.size()>0) {
+            numberOfPlaces = getNumberOfParkingPlacesAndSaveToDatabase(pointList.iterator(),numberOfPlaces,parking);
+        }
+        return numberOfPlaces;
+    }
+
+    public int getNumberOfParkingPlacesAndSaveToDatabase( Iterator<Point> it, int numberOfPlaces, ParkingEntity parking){
         Point one = null;
         Point two = null;
         Point three = null;
@@ -55,14 +71,12 @@ public class ParkingPlaceService {
             ParkingPlaceEntity parkingPlaceEntity = new ParkingPlaceEntity(parking,
                 one.getX(),one.getY(),two.getX(),two.getY(),three.getX(),three.getY(),
                 four.getX(),four.getY());
+            numberOfPlaces++;
             parkingPlaceRepository.save(parkingPlaceEntity);
             one = three;
             two = four;
         }
-        parking.setHasAddedPoints(true);
-        parkingRepository.save(parking);
-        System.out.println("POINTS WAS ADDED");
-
+        return numberOfPlaces;
     }
 
 }

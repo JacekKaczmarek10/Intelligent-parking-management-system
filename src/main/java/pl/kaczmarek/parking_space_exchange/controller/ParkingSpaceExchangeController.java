@@ -57,12 +57,10 @@ public class ParkingSpaceExchangeController {
         return "parking_space_exchange_management";
     }
 
-
     @PostMapping("/add-land-lord")
     public String addLandLord(LandLordRequest landLordRequest) throws ParseException {
         landLordService.addLandLord(landLordRequest);
         return "parking_space_exchange_management";
     }
-
 
 }

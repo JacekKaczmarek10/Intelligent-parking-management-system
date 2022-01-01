@@ -24,17 +24,13 @@ class IntelligentParkingApplicationTests {
         parkingRepository.save(new ParkingEntity("Banan"));
     }
 
-
-    @Test
-    void contextLoads() {
-    }
-
-
     @Test
     void test_get_all_parkings(){
         assertEquals(10,ParkingService.add(5,5));
     }
 
+
+    // mock example
     @Test()
     void test_get_by_name(){
         when(parkingRepository.getByName("Banan")).thenReturn(new ParkingEntity("Banan"));

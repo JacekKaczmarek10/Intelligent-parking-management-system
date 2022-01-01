@@ -34,12 +34,19 @@ public class ParkingService  {
     @Value("${filesPath}")
     private String filesPath;
 
+    /**
+     * Saving parking object to database
+     * @param parking - parking request object with data
+     */
     public void addParking(ParkingRequest parking){
         ParkingEntity parkingEntity = new ParkingEntity(parking.getNumberOfPlaces(),parking.getCity(),
             parking.getName(),parking.getStreet(),parking.getPostalCode());
         parkingRepository.save(parkingEntity);
     }
 
+    /**
+     * Return list of all parking
+     */
     public List<ParkingEntity> getAll(){
         return parkingRepository.findAll();
     }
@@ -48,9 +55,11 @@ public class ParkingService  {
         return a+b;
     }
 
-
-
-
+    /**
+     * Scanning folder with uploaded images.
+     * Function gets coordinates from images and creates new parking places.
+     * Parking places are being saved to database.
+     */
     @Scheduled(cron = "0 */5 * * * ?")
     public void scanParkingImage() throws IOException {
 
@@ -61,15 +70,31 @@ public class ParkingService  {
             BufferedImage img = ImageIO.read(new File(filesPath + parking.getImagePath()));
             List <Point> pointList = getParkingPlacesCoordinatesFromImage(img);
             // create parking places
-            parkingPlaceService.createParkingPlaces(parking,pointList);
+            int numberOfParkingPlaces = parkingPlaceService.createParkingPlaces(parking,pointList);
+            setParkingAsAlreadyScanned(parking,numberOfParkingPlaces);
         }
         System.out.println("SCANNING PARKING CONFIG IMAGE");
     }
 
+
     /**
-     * @param img
+     * Function sets parking fields data.
+     * @param parking
+     * @param numberOfPlaces
+     */
+    public void setParkingAsAlreadyScanned(ParkingEntity parking, int numberOfPlaces){
+        parking.setNumberOfPlaces(numberOfPlaces);
+        parking.setHasAddedPoints(true);
+        parkingRepository.save(parking);
+    }
+
+    /**
+     * Function searches for black dots in image.
+     * Save coordinates of each point and add them to the list.
      *
-     * @return
+     * @param img - parking config image
+     *
+     * @return list of coordinates of each point
      */
     public  List<Point> getParkingPlacesCoordinatesFromImage(BufferedImage img){
         List<Point> pointList = new ArrayList<>();
@@ -87,11 +112,15 @@ public class ParkingService  {
 
 
     /**
-     * @param x
-     * @param y
-     * @param pointList
+     * Function searches for black pixel.
+     * If black pixel is found, then point is added to list.
+     * Black pixel near that point are not being added to list.
      *
-     * @return
+     * @param x - x coordinate of point
+     * @param y - y coordinate of point
+     * @param pointList - list of points
+     *
+     * @return information if point is already added to the list
      */
     public boolean hasAlreadyPoint(int x,int y,List<Point> pointList){
         for(Point point: pointList){

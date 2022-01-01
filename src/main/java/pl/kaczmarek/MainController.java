@@ -32,6 +32,11 @@ public class MainController {
         return "index";
     }
 
+    @GetMapping("/welcome")
+    public String showWelcomePage(){
+        return "index";
+    }
+
     @GetMapping("/parking")
     public String showAwsPage(){
         return "parking";

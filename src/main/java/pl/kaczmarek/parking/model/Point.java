@@ -3,6 +3,9 @@ package pl.kaczmarek.parking.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * Class that represents coordinates of each point.
+ */
 @Getter
 @NoArgsConstructor
 public class Point {
