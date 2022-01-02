@@ -30,37 +30,37 @@ public class ParkingSpaceExchangeController {
 
     @GetMapping("/showParkingExchangeForm")
     public String showParkingExchangeForm(){
-        return "parking_space_exchange_management";
+        return "/templates/application/parking_space_exchange_management.html";
     }
 
     @GetMapping("/showAddLandLordForm")
     public String showAddLandLordForm(Model model){
         model.addAttribute("landLord",new LandLordRequest());
-        return "add_land_lord";
+        return "/templates/application/add_land_lord.html";
     }
 
     @GetMapping("/showAddHireForm")
     public String showAddHireForm(Model model){
         model.addAttribute("hire",new HireRequest());
-        return "add_hire";
+        return "/templates/application/add_hire.html";
     }
 
     @GetMapping("/getAllUsers")
     public String getAllUsers(Model model) throws ParseException {
         model.addAttribute("users",userService.getUserList());
-        return "parking_space_exchange_users";
+        return "/templates/application/parking_space_exchange_users.html";
     }
 
     @PostMapping("/add-hire")
     public String addHire(HireRequest hireRequest) throws ParseException {
         hireService.addHire(hireRequest);
-        return "parking_space_exchange_management";
+        return "/templates/application/parking_space_exchange_management.html";
     }
 
     @PostMapping("/add-land-lord")
     public String addLandLord(LandLordRequest landLordRequest) throws ParseException {
         landLordService.addLandLord(landLordRequest);
-        return "parking_space_exchange_management";
+        return "/templates/application/parking_space_exchange_management.html";
     }
 
 }
