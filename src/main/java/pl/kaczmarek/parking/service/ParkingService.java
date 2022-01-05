@@ -40,7 +40,8 @@ public class ParkingService  {
      */
     public void addParking(ParkingRequest parking){
         ParkingEntity parkingEntity = new ParkingEntity(parking.getNumberOfPlaces(),parking.getCity(),
-            parking.getName(),parking.getStreet(),parking.getPostalCode());
+            parking.getPostalCode(),parking.getStreet(),parking.getNumber(),parking.getLat(),parking.getLng(),
+            parking.getName(),parking.getIsGuarded());
         parkingRepository.save(parkingEntity);
     }
 

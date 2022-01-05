@@ -35,16 +35,32 @@ public class ParkingEntity {
     public String city;
 
     @NotNull
-    @Column(name = "name", unique = true)
-    public String name;
+    @Column(name = "postal_code")
+    public String postalCode;
 
     @NotNull
     @Column(name = "street")
     public String street;
 
     @NotNull
-    @Column(name = "postal_code")
-    public String postalCode;
+    @Column(name = "number")
+    public Integer number;
+
+    @NotNull
+    @Column(name = "lat")
+    public Float lat;
+
+    @NotNull
+    @Column(name = "lng")
+    public Float lng;
+
+    @NotNull
+    @Column(name = "name", unique = true)
+    public String name;
+
+    @NotNull
+    @Column(name = "is_guarded")
+    public boolean isGuarded;
 
     @NotNull
     @Column(name = "has_added_points")
@@ -54,6 +70,10 @@ public class ParkingEntity {
     @Column(name = "image_path", unique = true)
     public String imagePath;
 
+    @Column(name = "parking_status", unique = true)
+    public ParkingStatus parkingStatus;
+
+
     public ParkingEntity() {
     }
 
@@ -61,14 +81,25 @@ public class ParkingEntity {
         this.name = name;
     }
 
-    public ParkingEntity(int numberOfPlaces, String city, String name, String street, String postalCode) {
+    public ParkingEntity(
+        int numberOfPlaces,
+        String city,
+        String postalCode,
+        String street,
+        Integer number,
+        Float lat,
+        Float lng,
+        String name,
+        boolean isGuarded) {
         this.numberOfPlaces = numberOfPlaces;
         this.city = city;
-        this.name = name;
-        this.street = street;
         this.postalCode = postalCode;
-        this.hasAddedPoints = false;
+        this.street = street;
+        this.number = number;
+        this.lat = lat;
+        this.lng = lng;
+        this.name = name;
+        this.isGuarded = isGuarded;
+        this.parkingStatus=ParkingStatus.WAITING;
     }
-
-
 }

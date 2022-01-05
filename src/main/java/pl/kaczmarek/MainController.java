@@ -29,33 +29,38 @@ public class MainController {
 
     @GetMapping()
     public String showPage(){
-        return "/templates/page/index.html";
+        return "index";
     }
 
     @GetMapping("/welcome")
     public String showWelcomePage(){
-        return "/templates/page/index.html";
+        return "index";
     }
 
     @GetMapping("/contact")
     public String showContactPage(){
-        return "/templates/page/contact.html";
+        return "contact";
     }
 
     @GetMapping("/about-us")
     public String showAboutUsPage(){
-        return "/templates/page/about-us.html";
+        return "about-us";
+    }
+
+    @GetMapping("/application")
+    public String showApplicationPage(){
+        return "application";
     }
 
     @GetMapping("/parking")
     public String showAwsPage(){
-        return "/templates/application/parking.html";
+        return "parking";
     }
 
     @GetMapping("/display-parking")
     public String displayParking(Model model){
         model.addAttribute("parkings",parkingService.getAll());
-        return "/templates/application/parking.html";
+        return "parking";
     }
 
 
@@ -64,6 +69,6 @@ public class MainController {
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
         List<ParkingPlaceEntity> list = parkingPlaceRepository.getAllByParkingId(parkingEntity.getId());
         model.addAttribute("parkingPlaces",list);
-        return "/templates/application/parking_details.html";
+        return "parking_details";
     }
 }
