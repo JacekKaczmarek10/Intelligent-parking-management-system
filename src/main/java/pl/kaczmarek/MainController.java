@@ -57,6 +57,22 @@ public class MainController {
         return "parking";
     }
 
+    @GetMapping("/parking-owner")
+    public String showParkingOwnerPage(){
+        return "parking-owner";
+    }
+
+    @GetMapping("/parking-driver")
+    public String showParkingDriverPage(){
+        return "parking-driver";
+    }
+
+    @GetMapping("/show-add-parking")
+    public String showAddParkingPage(){
+        return "show-add-parking";
+    }
+
+
     @GetMapping("/display-parking")
     public String displayParking(Model model){
         model.addAttribute("parkings",parkingService.getAll());
