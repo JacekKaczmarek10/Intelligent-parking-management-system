@@ -9,36 +9,35 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ParkingRequest {
 
-    public int numberOfPlaces;
-    public String city;
+    public String email;
     public String name;
+
+    public String city;
     public String street;
     public String postalCode;
     public Integer number;
-    public Float lat;
-    public Float lng;
-    public Boolean isGuarded;
 
+    public String phoneNumber;
+    public Boolean isGuarded;
+    public int numberOfPlaces;
 
     public ParkingRequest(
-        int numberOfPlaces,
-        String city,
         String name,
+        String email,
+        String city,
         String street,
         String postalCode,
         Integer number,
-        Float lat,
-        Float lng,
-        Boolean isGuarded) {
-        this.numberOfPlaces = numberOfPlaces;
-        this.city = city;
+        String phoneNumber, Boolean isGuarded, int numberOfPlaces) {
+        this.email = email;
         this.name = name;
+        this.city = city;
         this.street = street;
         this.postalCode = postalCode;
         this.number = number;
-        this.lat = lat;
-        this.lng = lng;
+        this.phoneNumber = phoneNumber;
         this.isGuarded = isGuarded;
+        this.numberOfPlaces = numberOfPlaces;
     }
 }
 

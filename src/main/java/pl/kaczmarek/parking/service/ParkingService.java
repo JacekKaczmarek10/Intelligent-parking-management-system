@@ -31,17 +31,17 @@ public class ParkingService  {
     @Autowired
     ParkingRepository parkingRepository;
 
-    @Value("${filesPath}")
-    private String filesPath;
+    @Value("${editedImagesPath}")
+    private String editedImagesPath;
 
     /**
      * Saving parking object to database
      * @param parking - parking request object with data
      */
     public void addParking(ParkingRequest parking){
-        ParkingEntity parkingEntity = new ParkingEntity(parking.getNumberOfPlaces(),parking.getCity(),
-            parking.getPostalCode(),parking.getStreet(),parking.getNumber(),parking.getLat(),parking.getLng(),
-            parking.getName(),parking.getIsGuarded());
+        ParkingEntity parkingEntity = new ParkingEntity(parking.getEmail(),parking.getName(),
+            parking.getCity(),parking.getStreet(),parking.getPostalCode(),
+            parking.getNumber(),parking.getPhoneNumber(),parking.getIsGuarded(),parking.getNumberOfPlaces());
         parkingRepository.save(parkingEntity);
     }
 
@@ -68,7 +68,7 @@ public class ParkingService  {
         List<ParkingEntity> parkingEntityList = parkingRepository.getAllWithoutParkingPlaces();
         for(ParkingEntity parking : parkingEntityList) {
             // Open a JPEG file, load into a BufferedImage.
-            BufferedImage img = ImageIO.read(new File(filesPath + parking.getImagePath()));
+            BufferedImage img = ImageIO.read(new File(editedImagesPath + parking.getImagePath()));
             List <Point> pointList = getParkingPlacesCoordinatesFromImage(img);
             // create parking places
             int numberOfParkingPlaces = parkingPlaceService.createParkingPlaces(parking,pointList);

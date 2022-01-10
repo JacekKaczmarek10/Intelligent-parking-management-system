@@ -27,8 +27,12 @@ public class ParkingEntity {
     private long id;
 
     @NotNull
-    @Column(name = "number_of_places")
-    public int numberOfPlaces;
+    @Column(name = "email", unique = true)
+    public String email;
+
+    @NotNull
+    @Column(name = "name", unique = true)
+    public String name;
 
     @NotNull
     @Column(name = "city")
@@ -54,13 +58,18 @@ public class ParkingEntity {
     @Column(name = "lng")
     public Float lng;
 
+
     @NotNull
-    @Column(name = "name", unique = true)
-    public String name;
+    @Column(name = "phone_number", unique = true)
+    public String phoneNumber;
 
     @NotNull
     @Column(name = "is_guarded")
     public boolean isGuarded;
+
+    @NotNull
+    @Column(name = "number_of_places")
+    public int numberOfPlaces;
 
     @NotNull
     @Column(name = "has_added_points")
@@ -69,6 +78,10 @@ public class ParkingEntity {
     @NotNull
     @Column(name = "image_path", unique = true)
     public String imagePath;
+
+    @NotNull
+    @Column(name = "upload_path", unique = true)
+    public String uploadPath;
 
     @Column(name = "parking_status", unique = true)
     public ParkingStatus parkingStatus;
@@ -82,24 +95,24 @@ public class ParkingEntity {
     }
 
     public ParkingEntity(
-        int numberOfPlaces,
+        String email,
+        String name,
         String city,
         String postalCode,
         String street,
         Integer number,
-        Float lat,
-        Float lng,
-        String name,
-        boolean isGuarded) {
-        this.numberOfPlaces = numberOfPlaces;
+        String phoneNumber,
+        boolean isGuarded,
+        int numberOfPlaces) {
+        this.email = email;
+        this.name = name;
         this.city = city;
         this.postalCode = postalCode;
         this.street = street;
         this.number = number;
-        this.lat = lat;
-        this.lng = lng;
-        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.numberOfPlaces = numberOfPlaces;
         this.isGuarded = isGuarded;
-        this.parkingStatus=ParkingStatus.WAITING;
+        this.parkingStatus = ParkingStatus.WAITING;
     }
 }

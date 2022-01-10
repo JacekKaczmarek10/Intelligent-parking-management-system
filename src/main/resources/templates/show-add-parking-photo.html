@@ -6,7 +6,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Formularz dodawania parkingu</title>
+    <title>Formularz dodawania zdjęcia do parkingu</title>
     <link rel="stylesheet" href="../static/css/nicepage.css" th:href="@{cssX/nicepage.css}" media="screen">
     <link rel="stylesheet" href="../static/css/show-add-parking.css" th:href="@{cssX/show-add-parking.css}" media="screen">
     <script class="u-script" type="text/javascript" src="../static/js/jquery.js" th:src="@{jsX/jquery.js}" defer=""></script>
@@ -66,74 +66,77 @@
     </nav>
 </div></header>
 <section class="u-clearfix u-image u-shading u-section-1" id="carousel_28b6" data-image-width="1980" data-image-height="1320">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
             <div class="u-layout">
                 <div class="u-layout-row">
                     <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-                        <div class="u-container-layout u-valign-middle u-container-layout-1">
-                            <h2 class="u-text u-text-body-alt-color u-text-1">Rejestracja parkingu</h2>
-                            <p class="u-custom-font u-heading-font u-text u-text-body-alt-color u-text-2">Rejestracja parkingu text.</p>
-                            <a href="https://nicepage.com/website-design" class="u-border-2 u-border-white u-btn u-btn-rectangle u-button-style u-none u-btn-1" target="_blank">Dowiedz się więcej<br>
-                            </a>
+                        <div class="u-container-layout u-container-layout-1">
+                            <h3 class="u-text u-text-default u-text-2">1. Dodaj zdjęcie do parkingu</h3>
+                            <div class="u-form u-form-1">
+                                <form action="http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/add-parking-image"
+                                      method="POST"
+                                      style="padding: 10px" source="custom" name="form" enctype="multipart/form-data">
+                                    <div class="u-form-email u-form-group">
+                                        <label class="u-label u-text-body-alt-color u-label-1">Nazwa parkingu</label>
+                                        <input type="text" placeholder="Podaj nazwę parkingu" th:name="name"
+                                               class="u-input u-input-rectangle u-white" required="">
+                                        <label for="avatar">Dodaj zdjęcie parkingu</label>
+                                        <input type="file"
+                                               id="avatar" th:name="file"
+                                               accept="image/png, image/jpeg">
+                                    </div>
+                                    <div class="u-align-left u-form-group u-form-submit">
+                                        <a href="http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/show-add-parking-photo" class="u-btn u-btn-submit u-button-style u-white u-btn-1">Dodaj<br>
+                                        </a>
+                                        <input type="submit" value="submit" class="u-form-control-hidden">
+                                    </div>
+                                    <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
+                                    <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
+                                    <input type="hidden" value="" name="recaptchaResponse">
+                                </form>
+                            </div>
+                            <h3 class="u-text u-text-default u-text-2">2. Pobierz zdjęcie parkingu</h3>
+                            <div class="u-container-style u-group u-shape-rectangle u-white u-group-1">
+                                <div class="u-container-layout u-container-layout-2">
+                                    <p class="u-text u-text-default u-text-3"> Aby pobrać zdjęcie otwórz w przeglądarce poniższy url:<br>
+                                        http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/photo/nazwa_parkingu<br>
+                                        <br>
+                                        <br>nazwa-parking- nazwa podana w formularzu
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-                        <div class="u-container-layout u-valign-top u-container-layout-2">
-                            <div class="u-form u-form-1">
-                                <form th:action="@{/add-parking}" method="POST"
-                                      class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form"
-                                      style="padding: 10px" source="custom" name="form">
-                                    <div class="u-form-email u-form-group u-form-partition-factor-2">
-                                        <label for="email-319a" class="u-label u-text-body-alt-color u-label-1">Adres email</label>
-                                        <input th:name="email" type="email" placeholder="Podaj adres email" id="email-319a"
-                                               class="u-input u-input-rectangle u-white" required="true">
-                                    </div>
-                                    <div class="u-form-group u-form-name u-form-partition-factor-2">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Nazwa parkingu</label>
-                                        <input th:name="name" type="text" placeholder="Podaj nazwę parkingu" id="name-320a"
-                                               class="u-input u-input-rectangle u-white" required="true">
-                                    </div>
-                                    <div class="u-form-group u-form-name u-form-partition-factor-2">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Miasto</label>
-                                        <input th:name="city" type="text" placeholder="Podaj nazwę miasta" id="name-321a"
+                        <div class="u-container-layout u-valign-top u-container-layout-3">
+                            <h3 class="u-text u-text-default u-text-4">3. Edycja zdjęcia parkingowego</h3>
+                            <div class="u-container-style u-group u-shape-rectangle u-white u-group-2">
+                                <div class="u-container-layout u-container-layout-4">
+                                    <p class="u-text u-text-default u-text-5">Aby edytować zdjęcie skopiuj jego url i wejdź na stronę poniżej i edytuj zdjęcie.<br> https://markdots3.s3.eu-west-1.amazonaws.com/<br>photo+editing+web+application/index.html<br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                    </p>
+                                </div>
+                            </div>
+                            <h3 class="u-text u-text-default u-text-6">4. Wgraj zmienione zdjęcie</h3>
+                            <div class="u-form u-form-2">
+                                <form action="http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/add-edited-parking-image"
+                                      method="POST"
+                                      style="padding: 10px" source="custom" name="form" enctype="multipart/form-data">
+                                    <div class="u-form-email u-form-group">
+                                        <label class="u-label u-text-body-alt-color u-label-1">Nazwa parkingu</label>
+                                        <input type="text" placeholder="Podaj nazwę parkingu" th:name="name"
                                                class="u-input u-input-rectangle u-white" required="">
+                                        <label for="avatar">Dodaj zdjęcie parkingu</label>
+                                        <input type="file"
+                                               id="file" th:name="file"
+                                               accept="image/png, image/jpeg">
                                     </div>
-                                    <div class="u-form-group u-form-name u-form-partition-factor-2">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Kod pocztowy</label>
-                                        <input th:name="postalCode" type="text" placeholder="Podaj kod pocztowy" id="name-319a"
-                                                class="u-input u-input-rectangle u-white" required="">
-                                    </div>
-                                    <div class="u-form-group u-form-name u-form-partition-factor-2">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Ulica</label>
-                                        <input th:name="street" type="text" placeholder="Podaj nazwę ulicy" id="name-322a"
-                                               class="u-input u-input-rectangle u-white" required="">
-                                    </div>
-                                    <div class="u-form-group u-form-name u-form-partition-factor-2">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Numer</label>
-                                        <input th:name="number" type="number" placeholder="Podaj numer ulicy" id="name-323a"
-                                               class="u-input u-input-rectangle u-white" required="">
-                                    </div>
-                                    <div class="u-form-group u-form-phone u-form-group-4">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Numer telefonu</label>
-                                        <input th:name="phoneNumber" type="tel" pattern="\+?\d{0,3}[\s\(\-]?([0-9]{2,3})[\s\)\-]?([\s\-]?)([0-9]{3})[\s\-]?([0-9]{2})[\s\-]?([0-9]{2})" placeholder="Wprowadź swój numer telefonu " id="phone-17e3" class="u-input u-input-rectangle u-white" required="">
-                                    </div>
-                                    <div class="u-form-group u-form-phone u-form-group-4">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Strzeżony parking</label>
-                                        <input th:name="isGuarded" type="checkbox" checked="checked" id="name-324a" name="name"
-                                               class="u-input u-input-rectangle u-white" required="">
-                                    </div>
-                                    <div class="u-form-group u-form-name u-form-partition-factor-2">
-                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Ilość miejsc na parkingu</label>
-                                        <input th:name="numberOfPlaces" type="number" placeholder="Podaj ilosc miejsc na parkingu" id="name-325a"
-                                               class="u-input u-input-rectangle u-white" required="">
-                                    </div>
-<!--                                    <div class="u-form-group u-form-phone u-form-group-4">-->
-<!--                                        <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Zdjęcie parkingu</label>-->
-<!--                                        <input type="file" accept="image/*" class="u-input u-input-rectangle u-white" required=""/>-->
-<!--                                    </div>-->
                                     <div class="u-align-left u-form-group u-form-submit">
-                                        <a href="#" class="u-btn u-btn-submit u-button-style u-white u-btn-2">Dodaj parking</a>
+                                        <a href="http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/show-add-parking-photo" class="u-btn u-btn-submit u-button-style u-white u-btn-1">Dodaj<br>
+                                        </a>
                                         <input type="submit" value="submit" class="u-form-control-hidden">
                                     </div>
                                     <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>

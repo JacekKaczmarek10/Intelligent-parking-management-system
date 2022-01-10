@@ -68,8 +68,13 @@ public class MainController {
     }
 
     @GetMapping("/show-add-parking")
-    public String showAddParkingPage(){
+    public String showAddParking(){
         return "show-add-parking";
+    }
+
+    @GetMapping("/show-add-parking-photo")
+    public String showAddParkingPhoto(){
+        return "show-add-parking-photo";
     }
 
 

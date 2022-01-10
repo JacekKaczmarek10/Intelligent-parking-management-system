@@ -2,6 +2,7 @@ package pl.kaczmarek.utils;
 
 import org.dozer.Mapping;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -165,5 +166,16 @@ public class TypeConversionUtils {
         Date utilDate = date;
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
         return sqlDate;
+    }
+
+
+    public String getFileExtension(MultipartFile file){
+        String extension = "";
+
+        int i = file.getOriginalFilename().lastIndexOf('.');
+        if (i > 0) {
+            extension = file.getOriginalFilename().substring(i+1);
+        }
+        return ("." + extension);
     }
 }
