@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -82,6 +83,22 @@ public class MainController {
     public String displayParking(Model model){
         model.addAttribute("parkings",parkingService.getAll());
         return "parking";
+    }
+
+    @GetMapping("/parking-list")
+    public String displayParkingList(Model model){
+        model.addAttribute("parkings",parkingService.getAll());
+        return "parking_list";
+    }
+
+    @GetMapping("/displayGroups/{name}")
+    public String getAllGroups(Model model, @PathVariable("name") String name){
+        ParkingEntity parking = parkingRepository.getByName(name);
+        model.addAttribute("parkingData",parking);
+        model.addAttribute("parkingPlaces",parkingPlaceRepository.getAllByParkingId(parking.getId()));
+        model.addAttribute("name",
+            "http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/photo/" +parking.getName());
+        return "parking_data";
     }
 
 

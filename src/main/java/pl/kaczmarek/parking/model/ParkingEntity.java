@@ -58,7 +58,6 @@ public class ParkingEntity {
     @Column(name = "lng")
     public Float lng;
 
-
     @NotNull
     @Column(name = "phone_number", unique = true)
     public String phoneNumber;

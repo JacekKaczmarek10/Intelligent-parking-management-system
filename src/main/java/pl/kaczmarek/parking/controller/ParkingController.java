@@ -38,6 +38,7 @@ import pl.kaczmarek.parking.model.ParkingEntity;
 import pl.kaczmarek.parking.model.ParkingStatus;
 import pl.kaczmarek.parking.repository.ParkingRepository;
 import pl.kaczmarek.parking.service.ParkingService;
+import pl.kaczmarek.utils.EmailService;
 import pl.kaczmarek.utils.ValidationObject;
 import pl.kaczmarek.utils.ValidationService;
 import pl.kaczmarek.utils.dozer.BooleanObject;
@@ -56,6 +57,9 @@ public class ParkingController {
 
     @Autowired
     ValidationService validationService;
+
+    @Autowired
+    EmailService emailService;
 
     @Value("${uploadedImagesPath}")
     private String uploadedImagesPath;
@@ -162,6 +166,7 @@ public class ParkingController {
         }
 
         parkingService.addParking(new ParkingRequest(name,email,city,street,postalCode,number,phoneNumber,isGuarded,numberOfPlaces));
+        emailService.sendRegisterEmail(email,name);
         return ResponseEntity.status(200).build();
     }
 

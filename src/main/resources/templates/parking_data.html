@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Zarządzanie grupami</title>
+
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container my-2">
+  <h1> Dane parkingu</h1>
+
+  <td th:text="${parkingData.name}"></td>
+  <td th:text="${parkingData.email}"></td>
+  <td th:text="${parkingData.city}"></td>
+  <td th:text="${parkingData.street}"></td>
+  <td th:text="${parkingData.phoneNumber}"></td>
+  <td th:text="${parkingData.numberOfPlaces}"></td>
+  <td th:text="${parkingPlaces.size()}"></td>
+  <img th:src="${name}" alt="Girl in a jacket" >
+  <br>
+  <br>
+  <table border="1" class = "table table-striped table-responsive-md">
+    <thead class="thead-dark">
+    <tr>
+      <th>
+          Id miejsca parkingowego
+        </a>
+      </th>
+      <th>
+          Czy jest zajęte miejsce
+        </a>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="parking : ${parkingPlaces}">
+      <td th:text="${parking.id}"></td>
+      <td th:text="${parking.isFree}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <a th:href = "@{/}">Powrót do głównej listy</a>
+</div>
+
+<!--<tr th:each="employee : ${listEmployees}">-->
+<!--    <td th:text="${employee.firstName}"></td>-->
+
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -56,13 +57,12 @@ public class ParkingPlaceController {
             body(parkingPlaceRepository.save(new ParkingPlaceEntity(parkingEntity,x1,y1,x2,y2,x3,y3,x4,y4)));
     }
 
-    @RequestMapping(value = "/change-parking-place", method = RequestMethod.POST)
-    public ResponseEntity<Object> changeParkingStatus(@Param("status")Boolean status,
-                                                  @Param("id")Long id){
-        ParkingPlaceEntity parkingPlaceEntity = parkingPlaceRepository.getById(id);
-        parkingPlaceEntity.setIsFree(status);
-        parkingPlaceRepository.save(parkingPlaceEntity);
-        return ResponseEntity.status(200).build();
-    }
+//    @RequestMapping(value = "/change-parking-place", method = RequestMethod.POST)
+//    public ResponseEntity<Object> changeParkingStatus(@RequestBody ChangePlace changePlace){
+//        ParkingPlaceEntity parkingPlaceEntity = parkingPlaceRepository.getById(id);
+//        parkingPlaceEntity.setIsFree(status);
+//        parkingPlaceRepository.save(parkingPlaceEntity);
+//        return ResponseEntity.status(200).build();
+//    }
 
 }

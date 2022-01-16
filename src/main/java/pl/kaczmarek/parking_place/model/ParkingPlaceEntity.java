@@ -12,8 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import pl.kaczmarek.parking.model.ParkingEntity;
 
+
+@Getter
+@Setter
 @Entity
 @Data
 @Table(name = "Parking_place")
@@ -75,4 +80,6 @@ public class ParkingPlaceEntity {
         this.x_4 = x_4;
         this.y_4 = y_4;
     }
+
+
 }
