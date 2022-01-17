@@ -18,6 +18,7 @@ import java.util.List;
 import pl.kaczmarek.parking.model.ParkingEntity;
 import pl.kaczmarek.parking.repository.ParkingRepository;
 import pl.kaczmarek.parking_place.dto.ParkingPlacesDetailedResponse;
+import pl.kaczmarek.parking_place.model.ChangePlace;
 import pl.kaczmarek.parking_place.model.ParkingPlaceEntity;
 import pl.kaczmarek.parking_place.repository.ParkingPlaceRepository;
 import pl.kaczmarek.parking_place.service.ParkingPlaceService;
@@ -37,6 +38,10 @@ public class ParkingPlaceController {
     @RequestMapping(value = "/get-parking-places", method = RequestMethod.GET)
     public ResponseEntity<Object> getParkingPlacesData(@Param("name")String name){
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
+        if(parkingEntity==null){
+            return ResponseEntity.status(400).body("No parking with that name");
+        }
+
         List<ParkingPlaceEntity> list = parkingPlaceRepository.getAllByParkingId(parkingEntity.getId());
         return ResponseEntity.status(200).body(new ParkingPlacesDetailedResponse(name,list.size(),
             parkingPlaceService.getResponseList(list)));
@@ -57,12 +62,10 @@ public class ParkingPlaceController {
             body(parkingPlaceRepository.save(new ParkingPlaceEntity(parkingEntity,x1,y1,x2,y2,x3,y3,x4,y4)));
     }
 
-//    @RequestMapping(value = "/change-parking-place", method = RequestMethod.POST)
-//    public ResponseEntity<Object> changeParkingStatus(@RequestBody ChangePlace changePlace){
-//        ParkingPlaceEntity parkingPlaceEntity = parkingPlaceRepository.getById(id);
-//        parkingPlaceEntity.setIsFree(status);
-//        parkingPlaceRepository.save(parkingPlaceEntity);
-//        return ResponseEntity.status(200).build();
-//    }
+    @RequestMapping(value = "/change-parking-place", method = RequestMethod.POST)
+    public ResponseEntity<Object> changeParkingStatus(@RequestBody ChangePlace changePlace){
+        parkingPlaceService.updatePlaces(changePlace);
+        return ResponseEntity.status(200).build();
+    }
 
 }

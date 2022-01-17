@@ -169,7 +169,7 @@ public class TypeConversionUtils {
     }
 
 
-    public String getFileExtension(MultipartFile file){
+    public static String getFileExtension(MultipartFile file){
         String extension = "";
 
         int i = file.getOriginalFilename().lastIndexOf('.');

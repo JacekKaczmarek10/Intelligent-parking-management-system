@@ -39,6 +39,7 @@ import pl.kaczmarek.parking.model.ParkingStatus;
 import pl.kaczmarek.parking.repository.ParkingRepository;
 import pl.kaczmarek.parking.service.ParkingService;
 import pl.kaczmarek.utils.EmailService;
+import pl.kaczmarek.utils.TypeConversionUtils;
 import pl.kaczmarek.utils.ValidationObject;
 import pl.kaczmarek.utils.ValidationService;
 import pl.kaczmarek.utils.dozer.BooleanObject;
@@ -81,7 +82,7 @@ public class ParkingController {
         if(parkingEntity==null){
             return ResponseEntity.status(400).build();
         }
-        String fileName = file.getOriginalFilename();
+        String fileName = name + TypeConversionUtils.getFileExtension(file);
         Path path = Paths.get(uploadedImagesPath + fileName);
         try {
             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
@@ -167,6 +168,7 @@ public class ParkingController {
 
         parkingService.addParking(new ParkingRequest(name,email,city,street,postalCode,number,phoneNumber,isGuarded,numberOfPlaces));
         emailService.sendRegisterEmail(email,name);
+        System.out.println("PARKING WAS ADDED");
         return ResponseEntity.status(200).build();
     }
 

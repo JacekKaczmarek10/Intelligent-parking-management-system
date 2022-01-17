@@ -14,6 +14,7 @@ import pl.kaczmarek.parking.model.ParkingEntity;
 import pl.kaczmarek.parking.model.Point;
 import pl.kaczmarek.parking.repository.ParkingRepository;
 import pl.kaczmarek.parking_place.dto.ParkingPlaceResponse;
+import pl.kaczmarek.parking_place.model.ChangePlace;
 import pl.kaczmarek.parking_place.model.ParkingPlaceEntity;
 import pl.kaczmarek.parking_place.repository.ParkingPlaceRepository;
 
@@ -77,6 +78,22 @@ public class ParkingPlaceService {
             two = four;
         }
         return numberOfPlaces;
+    }
+
+    public void updatePlaces(ChangePlace changePlace){
+        ParkingEntity parking = parkingRepository.getByName(changePlace.getName());
+        List<ParkingPlaceEntity> parkingPlaceEntities = parkingPlaceRepository.getAllByParkingId(parking.getId());
+        int i=0;
+        for(ParkingPlaceEntity parkingPlaceEntity : parkingPlaceEntities){
+            if(changePlace.getParkingPlaces().get(0)==1) {
+                parkingPlaceEntity.setIsFree(true);
+            }
+            else {
+                parkingPlaceEntity.setIsFree(false);
+            }
+            parkingPlaceRepository.save(parkingPlaceEntity);
+            i++;
+        }
     }
 
 }

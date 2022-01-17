@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class ChangePlace {
 
-    List<Integer> list;
+    List<Integer> parkingPlaces;
     String name;
 
 

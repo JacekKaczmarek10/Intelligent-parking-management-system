@@ -61,7 +61,7 @@ public class ParkingService  {
      * Function gets coordinates from images and creates new parking places.
      * Parking places are being saved to database.
      */
-    @Scheduled(cron = "0/30 * * * * ?")
+    @Scheduled(cron = "0 */5 * * * ?")
     public void scanParkingImage() throws IOException {
 
         System.out.println("SCANNING PARKING CONFIG IMAGE RUNNING");
