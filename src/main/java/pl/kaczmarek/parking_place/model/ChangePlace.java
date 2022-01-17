@@ -13,5 +13,8 @@ public class ChangePlace {
     List<Integer> parkingPlaces;
     String name;
 
-
+    public ChangePlace(List<Integer> parkingPlaces, String name) {
+        this.parkingPlaces = parkingPlaces;
+        this.name = name;
+    }
 }

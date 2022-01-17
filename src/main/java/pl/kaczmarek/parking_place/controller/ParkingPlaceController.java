@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import pl.kaczmarek.parking.model.ParkingEntity;
 import pl.kaczmarek.parking.repository.ParkingRepository;
@@ -63,7 +65,14 @@ public class ParkingPlaceController {
     }
 
     @RequestMapping(value = "/change-parking-place", method = RequestMethod.POST)
-    public ResponseEntity<Object> changeParkingStatus(@RequestBody ChangePlace changePlace){
+    public ResponseEntity<Object> changeParkingStatus(@Param("name")String name,
+                                                      @Param("parkingPlaces")int[] parkingPlaces){
+        ParkingEntity parkingEntity = parkingRepository.getByName(name);
+        if(parkingEntity==null){
+            return ResponseEntity.status(400).body("No parking with that name");
+        }
+        List<Integer> list = Arrays.stream(parkingPlaces).boxed().collect(Collectors.toList());
+        ChangePlace changePlace = new ChangePlace(list,name);
         parkingPlaceService.updatePlaces(changePlace);
         return ResponseEntity.status(200).build();
     }

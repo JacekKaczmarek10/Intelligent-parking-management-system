@@ -66,16 +66,53 @@ public class ParkingPlaceService {
         Point four = null;
         one = it.next();
         two = it.next();
+        ParkingPlaceEntity parkingPlaceEntity = null;
         while(it.hasNext()){
+
+
             three = it.next();
             four = it.next();
-            ParkingPlaceEntity parkingPlaceEntity = new ParkingPlaceEntity(parking,
-                one.getX(),one.getY(),two.getX(),two.getY(),three.getX(),three.getY(),
-                four.getX(),four.getY());
+
+            // 2,1
+            if(one.getY()>two.getY()){
+                // 3,4
+                if(three.getY()<four.getY()){
+                     parkingPlaceEntity = new ParkingPlaceEntity(parking,
+                        two.getX(),two.getY(),one.getX(),one.getY(),four.getX(),four.getY(),
+                        three.getX(),three.getY());
+                }
+                //4,3
+                else {
+                    parkingPlaceEntity = new ParkingPlaceEntity(parking,
+                        two.getX(),two.getY(),one.getX(),one.getY(),three.getX(),three.getY(),
+                        four.getX(),four.getY());
+                }
+            }
+            // 1.2
+            else {
+                // 4,3
+                if(three.getY()<four.getY()){
+                    parkingPlaceEntity = new ParkingPlaceEntity(parking,
+                        one.getX(),one.getY(),two.getX(),two.getY(),four.getX(),four.getY(),
+                        three.getX(),three.getY());
+                }
+                // 3,4
+                else {
+                    parkingPlaceEntity = new ParkingPlaceEntity(parking,
+                        one.getX(),one.getY(),two.getX(),two.getY(),three.getX(),three.getY(),
+                        four.getX(),four.getY());
+                }
+            }
             numberOfPlaces++;
             parkingPlaceRepository.save(parkingPlaceEntity);
-            one = three;
-            two = four;
+            if(two.getY()>one.getY()){
+                one = four;
+                two = three;
+            }
+            else {
+                one = three;
+                two = four;
+            }
         }
         return numberOfPlaces;
     }
@@ -85,7 +122,7 @@ public class ParkingPlaceService {
         List<ParkingPlaceEntity> parkingPlaceEntities = parkingPlaceRepository.getAllByParkingId(parking.getId());
         int i=0;
         for(ParkingPlaceEntity parkingPlaceEntity : parkingPlaceEntities){
-            if(changePlace.getParkingPlaces().get(0)==1) {
+            if(changePlace.getParkingPlaces().get(i)==1) {
                 parkingPlaceEntity.setIsFree(true);
             }
             else {

@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Point {
 
-    private int x;
-    private int y;
+    private Integer x;
+    private Integer y;
 
-    public Point(int x, int y) {
+    public Point(Integer x, Integer y) {
         this.x = x;
         this.y = y;
     }

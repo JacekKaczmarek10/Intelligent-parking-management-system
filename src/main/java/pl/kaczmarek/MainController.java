@@ -1,6 +1,7 @@
 package pl.kaczmarek;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,13 +92,17 @@ public class MainController {
         return "parking_list";
     }
 
-    @GetMapping("/displayGroups/{name}")
+    @GetMapping("/getParkingDetails/{name}")
     public String getAllGroups(Model model, @PathVariable("name") String name){
         ParkingEntity parking = parkingRepository.getByName(name);
+        if(parking==null){
+            return "No parking with that name";
+        }
         model.addAttribute("parkingData",parking);
         model.addAttribute("parkingPlaces",parkingPlaceRepository.getAllByParkingId(parking.getId()));
         model.addAttribute("name",
             "http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/photo/" +parking.getName());
+        model.addAttribute("numberOfFreePlaces",parkingPlaceRepository.getAllFreeByParkingId(parking.getId()).size());
         return "parking_data";
     }
 
