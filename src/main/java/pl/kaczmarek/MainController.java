@@ -75,9 +75,21 @@ public class MainController {
     }
 
     @GetMapping("/show-add-parking-photo")
-    public String showAddParkingPhoto(){
+    public String showAddParkingsPhoto(){
         return "show-add-parking-photo";
     }
+
+
+//    @GetMapping("/show-add-parking-photo/{name}")
+//    public String showAddParkingPhoto(@PathVariable("name") String name, Model model){
+//        ParkingEntity parking = parkingRepository.getByName(name);
+//        if(parking==null){
+//            return "No parking with that name";
+//        }
+//        model.addAttribute("imageUrl","");
+//        model.addAttribute("editedImageUrl","")
+//        return "show-add-parking-photo-detailed";
+//    }
 
 
     @GetMapping("/display-parking")
