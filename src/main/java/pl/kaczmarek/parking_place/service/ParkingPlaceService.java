@@ -131,6 +131,8 @@ public class ParkingPlaceService {
             parkingPlaceRepository.save(parkingPlaceEntity);
             i++;
         }
+        parking.setNumberOfFreePlaces(parkingPlaceRepository.getAllFreeByParkingId(parking.getId()).size());
+        parkingRepository.saveAndFlush(parking);
     }
 
 }

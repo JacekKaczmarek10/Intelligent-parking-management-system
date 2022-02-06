@@ -54,11 +54,11 @@ public class EmailService {
             String body = "Witamy w inteligentnych parkingach! <br> </br> Nazwa twojego parkingu to:"
                 + name +
                 " <br> </br> <br> </br> Konfiguracja zdjęcia: " +
-                "http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/config-parking/" + name +
+                "http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/show-add-parking-photo"+
                 " <br> </br> Szczegóły parkingu: " +
                 "http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/getParkingDetails/" + name +
                 " <br> </br> Lista wszystkich parkingów: " +
-                "http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/config-parking/" + name +
+                "http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/parking-list" +
 
 
                 " <br> </br> <br> </br>Życzymy udanego korzystania z systemu!" + " <br> </br> Pozdrawiamy, zespół parkingi";

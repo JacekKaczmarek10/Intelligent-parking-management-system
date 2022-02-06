@@ -76,11 +76,11 @@ public class ParkingController {
     @RequestMapping(value = "/add-parking-image",
         method = RequestMethod.POST,
         headers = "Content-Type=multipart/form-data")
-    public ResponseEntity<Object> addParkingImage(@RequestParam("file") MultipartFile file,
+    public String addParkingImage(@RequestParam("file") MultipartFile file,
                                                   @RequestParam("name")String name){
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
         if(parkingEntity==null){
-            return ResponseEntity.status(400).build();
+            return ResponseEntity.status(400).build().toString();
         }
         String fileName = name + TypeConversionUtils.getFileExtension(file);
         Path path = Paths.get(uploadedImagesPath + fileName);
@@ -92,17 +92,17 @@ public class ParkingController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return ResponseEntity.status(200).build();
+        return "show-add-parking-photo";
     }
 
     @RequestMapping(value = "/add-edited-parking-image",
         method = RequestMethod.POST,
         headers = "Content-Type=multipart/form-data")
-    public ResponseEntity<Object> addEditedParkingImage(@RequestParam("file") MultipartFile file,
+    public String addEditedParkingImage(@RequestParam("file") MultipartFile file,
                                                   @RequestParam("name")String name){
         ParkingEntity parkingEntity = parkingRepository.getByName(name);
         if(parkingEntity==null){
-            return ResponseEntity.status(400).build();
+            return ResponseEntity.status(400).build().toString();
         }
         String fileName = file.getOriginalFilename();
         Path path = Paths.get(editedImagesPath + fileName);
@@ -114,7 +114,7 @@ public class ParkingController {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return ResponseEntity.status(200).build();
+        return "show-add-parking-photo";
     }
 
     @GetMapping(value = "/photo/{parkingName}")
