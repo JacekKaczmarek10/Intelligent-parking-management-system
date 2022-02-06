@@ -94,18 +94,23 @@
                 <tr style="height: 70px;">
                     <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-1">Nazwa&nbsp;</th>
                     <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-2">Ilość miejsc</th>
+                    <th
+                            class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-2">Ilość wolnych miejsc</th>
                     <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-3">MIASTO</th>
                     <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-4">uLICA</th>
                     <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-5">numer</th>
+                    <th class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-palette-5-dark-1 u-table-cell u-table-cell-5">Szczegóły</th>
                 </tr>
                 </thead>
                 <tbody class="u-black u-table-body u-table-body-1">
                 <tr th:each="parking : ${parkings}" style="height: 66px;">
                     <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-6" th:text="${parking.name}"></td>
                     <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-7" th:text="${parking.numberOfPlaces}"></td>
+                    <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-7" th:text="${parking.numberOfFreePlaces}"></td>
                     <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-8" th:text="${parking.city}"></td>
                     <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-9"th:text="${parking.street}"></td>
                     <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-10" th:text="${parking.phoneNumber}"></td>
+                    <td class="u-border-1 u-border-palette-5-dark-1 u-table-cell u-table-cell-10"> <a th:href="${parking.details} ">szczegóły</a></td>
                 </tr>
                 </tbody>
             </table>

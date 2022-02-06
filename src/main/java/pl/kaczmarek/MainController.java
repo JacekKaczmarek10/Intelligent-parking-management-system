@@ -118,12 +118,4 @@ public class MainController {
         return "parking_data";
     }
 
-
-    @GetMapping("/display-parking-details/{name}")
-    public String displayParking(Model model, @PathVariable("name") String name){
-        ParkingEntity parkingEntity = parkingRepository.getByName(name);
-        List<ParkingPlaceEntity> list = parkingPlaceRepository.getAllByParkingId(parkingEntity.getId());
-        model.addAttribute("parkingPlaces",list);
-        return "parking_details";
-    }
 }

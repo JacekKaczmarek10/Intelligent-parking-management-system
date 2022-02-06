@@ -71,12 +71,20 @@ public class ParkingEntity {
     public int numberOfPlaces;
 
     @NotNull
+    @Column(name = "number_of_free_places")
+    public int numberOfFreePlaces;
+
+    @NotNull
     @Column(name = "has_added_points")
     public boolean hasAddedPoints;
 
     @NotNull
     @Column(name = "image_path", unique = true)
     public String imagePath;
+
+    @NotNull
+    @Column(name = "details", unique = true)
+    public String details;
 
     @NotNull
     @Column(name = "upload_path", unique = true)

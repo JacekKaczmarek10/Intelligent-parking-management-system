@@ -42,6 +42,7 @@ public class ParkingService  {
         ParkingEntity parkingEntity = new ParkingEntity(parking.getEmail(),parking.getName(),
             parking.getCity(),parking.getStreet(),parking.getPostalCode(),
             parking.getNumber(),parking.getPhoneNumber(),parking.getIsGuarded(),parking.getNumberOfPlaces());
+        parkingEntity.setDetails("http://ec2-18-224-21-114.us-east-2.compute.amazonaws.com:8000/getParkingDetails/" + parking.getName());
         parkingRepository.save(parkingEntity);
     }
 
