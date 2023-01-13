@@ -7,3 +7,6 @@
  
  PRESENTATION:
  https://docs.google.com/presentation/d/1vDcqXZiP8bdzW7obk6eKi7FrFoIlynLG/edit#slide=id.p1
+ 
+ ![image](https://user-images.githubusercontent.com/58121352/212401228-80b5edbe-ce19-4840-ab28-7904f6495614.png)
+
